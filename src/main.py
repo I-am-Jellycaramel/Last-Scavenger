@@ -86,9 +86,11 @@ if __name__ == "__main__":
     #폰트 설정
     font = pygame.font.SysFont("nanumgothic", 70)
 
-    testImage = font.render("테스트 내용입니다. test", 1, COLOR_BLACK)
+    testImage = font.render("테스트 내용입니다. test", 1, COLOR_WHITE)
     testImageRect = testImage.get_rect()
     testImageRect.center = (GAME_FRAME_WIDTH/2, GAME_FRAME_HEIGHT/2)
+
+    background = pygame.image.load("last-scavanger-game-main-screen.png")
 
     while isRunning:
         for event in pygame.event.get():
@@ -96,7 +98,7 @@ if __name__ == "__main__":
                 pygame.quit()
                 isRunning = False
                 sys.exit()
-        displaySurf.fill(COLOR_WHITE)
+        displaySurf.blit(background, (0, 0))
         displaySurf.blit(testImage, testImageRect)
 
         pygame.display.update()
