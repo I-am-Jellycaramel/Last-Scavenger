@@ -12,20 +12,82 @@ import managers.situationManager as situationManager
 import managers.ymlManager as ymlManager
 import managers.listManager as listManager
 
-#
-# 상수
-#
-FPS = 30
-GAME_FRAME_WIDTH = 800
-GAME_FRAME_HEIGHT = 600
-COLOR_WHITE = (255, 255, 255)
-COLOR_BLACK = (0, 0, 0)
+#코드 영감: http://pygametutorials.wikidot.com/tutorials-basic
+class LastScavanager():
+    
+    #객체 초기화 될때
+    def __init__(self):
+        self.isRunning = True
+        self.displaySurf = None
+        self.gameFrameWidth = 800
+        self.gameFrameHeight = 600
+        self.colorWhite = (255, 255, 255)
+        self.colorBlack = (0, 0, 0)
+        self.fps = 30
+        self.gameTitle = "Last Scavanger - " + config.version
+        self.font = None
+        self.clock = None
+    
+    #게임 초기화 시킬 때
+    def onInit(self):
+        pygame.init()
 
-isRunning = True
+        #폰트 설정
+        self.font = pygame.font.SysFont("nanumgothic", 35)
 
-#게임 시작
-def runDefaultSetting():
-    pass
+        #시간 설정
+        self.clock = pygame.time.Clock()
+
+        #아이콘 설정
+        logo = pygame.image.load("last-scavanger-main-gui-icon.png")
+        pygame.display.set_icon(logo)
+
+        #창 제목 설정
+        pygame.display.set_caption(self.gameTitle)
+        self.displaySurf = pygame.display.set_mode((self.gameFrameWidth, self.gameFrameHeight))
+        
+        self.isRunning = True
+
+    #이벤트 감지할 때
+    def onEvent(self, event):
+        if (event.type == pygame.QUIT):
+            self.isRunning = False
+    
+    #반복 작업할 때
+    def onLoop(self):
+        self.clock.tick(self.fps)
+
+    #그래픽 작업할 때
+    def onRender(self):
+        testImage = self.font.render("테스트 내용입니다. test", 1, self.colorWhite)
+        testImageRect = testImage.get_rect()
+        testImageRect.center = (self.gameFrameWidth/2, self.gameFrameHeight/2)
+
+        background = pygame.image.load("last-scavanger-game-main-screen.png")
+
+        self.displaySurf.blit(background, (0, 0))
+        self.displaySurf.blit(testImage, testImageRect)
+
+        pygame.display.update()
+
+    #종료할 때
+    def onCleanup(self):
+        pygame.quit()
+        sys.exit()
+
+    def onExecute(self):
+        if self.onInit() is False:
+            self.isRunning = False
+
+        while self.isRunning:
+            for event in pygame.event.get():
+                self.onEvent(event)
+
+            self.onLoop()
+            self.onRender()
+
+        self.onCleanup()
+
 
     #메인 화면 문구
     #print("="*40)
@@ -73,38 +135,6 @@ if __name__ == "__main__":
     configYaml = ymlManager.loadYaml()
     config = config.Config(configYaml)
 
-    #pygame 초기화
-    pygame.init()
-
-    gameTitle = "Last Scavanger - " + config.version
-
-    #아이콘 설정
-    logo = pygame.image.load("last-scavanger-main-gui-icon.png")
-    pygame.display.set_icon(logo)
-
-    #창 제목 설정
-    pygame.display.set_caption(gameTitle)
-    #메인 디스플레이 설정
-    displaySurf = pygame.display.set_mode((GAME_FRAME_WIDTH, GAME_FRAME_HEIGHT), 0, 32)
-    #시간 설정
-    clock = pygame.time.Clock()
-    #폰트 설정
-    font = pygame.font.SysFont("nanumgothic", 70)
-
-    testImage = font.render("테스트 내용입니다. test", 1, COLOR_WHITE)
-    testImageRect = testImage.get_rect()
-    testImageRect.center = (GAME_FRAME_WIDTH/2, GAME_FRAME_HEIGHT/2)
-
-    background = pygame.image.load("last-scavanger-game-main-screen.png")
-
-    while isRunning:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                isRunning = False
-                sys.exit()
-        displaySurf.blit(background, (0, 0))
-        displaySurf.blit(testImage, testImageRect)
-
-        pygame.display.update()
-        clock.tick(FPS)
+    #게임 실행
+    lastScavanger = LastScavanager()
+    lastScavanger.onExecute()
