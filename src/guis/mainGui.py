@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import *
+'''from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 import main
 
@@ -19,4 +19,4 @@ class MainGUI(QMainWindow):
         self.statusBar.showMessage(main.config.version)
 
 app = QApplication(sys.argv)
-win = MainGUI()
+win = MainGUI()'''
