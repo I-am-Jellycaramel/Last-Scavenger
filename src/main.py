@@ -77,6 +77,11 @@ if __name__ == "__main__":
     pygame.init()
 
     gameTitle = "Last Scavanger - " + config.version
+
+    #아이콘 설정
+    logo = pygame.image.load("last-scavanger-main-gui-icon.png")
+    pygame.display.set_icon(logo)
+
     #창 제목 설정
     pygame.display.set_caption(gameTitle)
     #메인 디스플레이 설정
