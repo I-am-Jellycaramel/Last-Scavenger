@@ -1,16 +1,31 @@
 import os
+import sys
+
+import pygame
+from pygame.locals import *
 
 import classes.adventure as adventure
 import classes.house as house
 import classes.config as config
 import managers.itemManager as itemManager
 import managers.situationManager as situationManager
-import guis.mainGui as mainGui
 import managers.ymlManager as ymlManager
 import managers.listManager as listManager
 
+#
+# 상수
+#
+FPS = 30
+GAME_FRAME_WIDTH = 800
+GAME_FRAME_HEIGHT = 600
+COLOR_WHITE = (255, 255, 255)
+COLOR_BLACK = (0, 0, 0)
+
+isRunning = True
+
+
 #게임 시작
-def runGame():
+def runDefaultSetting():
     #화면 정리
     os.system("cls")
 
@@ -23,10 +38,6 @@ def runGame():
     global config
     configYaml = ymlManager.loadYaml()
     config = config.Config(configYaml)
-
-    #메인 GUI 열기
-    mainGui.win.show()
-    mainGui.app.exec_()
 
     #메인 화면 문구
     #print("="*40)
@@ -62,4 +73,32 @@ def printGameMainChoice():
 
 #메인 로직
 if __name__ == "__main__":
-    runGame()
+    runDefaultSetting()
+
+    #pygame 초기화
+    pygame.init()
+
+    #창 제목 설정
+    pygame.display.set_caption("Last Scavanger - ", config.version)
+    #메인 디스플레이 설정
+    displaySurf = pygame.display.set_mode((GAME_FRAME_WIDTH, GAME_FRAME_HEIGHT), 0, 32)
+    #시간 설정
+    clock = pygame.time.Clock()
+    #폰트 설정
+    font = pygame.font.SysFont("nanumgothic", 70)
+
+    testImage = font.render("테스트 내용입니다. test", 1, COLOR_BLACK)
+    testImageRect = testImage.get_rect()
+    testImageRect.center = (GAME_FRAME_WIDTH/2, GAME_FRAME_HEIGHT/2)
+
+    while isRunning:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                isRunning = False
+                sys.exit()
+        displaySurf.fill(COLOR_WHITE)
+        displaySurf.blit(testImage, testImageRect)
+
+        pygame.display.update()
+        clock.tick(FPS)
