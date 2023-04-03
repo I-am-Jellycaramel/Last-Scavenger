@@ -23,21 +23,9 @@ COLOR_BLACK = (0, 0, 0)
 
 isRunning = True
 
-
 #게임 시작
 def runDefaultSetting():
-    #화면 정리
-    os.system("cls")
-
-    #인스턴스 셋업
-    #print(prefix, "게임을 구성합니다.")
-    itemManager.setUp()
-    situationManager.setUp()
-
-    #yml 불러옴
-    global config
-    configYaml = ymlManager.loadYaml()
-    config = config.Config(configYaml)
+    pass
 
     #메인 화면 문구
     #print("="*40)
@@ -73,13 +61,24 @@ def printGameMainChoice():
 
 #메인 로직
 if __name__ == "__main__":
-    runDefaultSetting()
+    #화면 정리
+    os.system("cls")
+
+    #인스턴스 셋업
+    #print(prefix, "게임을 구성합니다.")
+    itemManager.setUp()
+    situationManager.setUp()
+
+    #yml 불러옴
+    configYaml = ymlManager.loadYaml()
+    config = config.Config(configYaml)
 
     #pygame 초기화
     pygame.init()
 
+    gameTitle = "Last Scavanger - " + config.version
     #창 제목 설정
-    pygame.display.set_caption("Last Scavanger - ", config.version)
+    pygame.display.set_caption(gameTitle)
     #메인 디스플레이 설정
     displaySurf = pygame.display.set_mode((GAME_FRAME_WIDTH, GAME_FRAME_HEIGHT), 0, 32)
     #시간 설정
