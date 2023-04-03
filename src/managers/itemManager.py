@@ -10,4 +10,5 @@ def getItem(number):
         
 
 def setUp():
-    print(main.prefix, "아이템을 초기화합니다.")
+    #print(main.prefix, "아이템을 초기화합니다.")
+    pass
