@@ -1,7 +1,6 @@
 import classes.situation as situation
 import enums.area as area
 import main
-import managers.situationManager as situationManager
 
 situationList = []
 
@@ -12,7 +11,7 @@ def getSituation(number):
         return None
 
 def setUp():
-    print(main.prefix, "상황을 초기화합니다.")
+    #print(main.prefix, "상황을 초기화합니다.")
     situation.Situation(
         0,
         "아무런 상황도 아님",
