@@ -1,12 +1,13 @@
 import os
-import time
 
 import classes.adventure as adventure
 import classes.house as house
+import classes.config as config
 import managers.itemManager as itemManager
 import managers.situationManager as situationManager
-
-prefix = " Last Scavanger :: "
+import guis.mainGui as mainGui
+import managers.ymlManager as ymlManager
+import managers.listManager as listManager
 
 #게임 시작
 def runGame():
@@ -14,16 +15,25 @@ def runGame():
     os.system("cls")
 
     #인스턴스 셋업
-    print(prefix, "게임을 구성합니다.")
+    #print(prefix, "게임을 구성합니다.")
     itemManager.setUp()
     situationManager.setUp()
 
-    #메인 화면 문구
-    print("="*40)
-    print("  Last Scavanger")
-    print("="*40)
+    #yml 불러옴
+    global config
+    configYaml = ymlManager.loadYaml()
+    config = config.Config(configYaml)
 
-    printGameMainChoice()
+    #메인 GUI 열기
+    mainGui.win.show()
+    mainGui.app.exec_()
+
+    #메인 화면 문구
+    #print("="*40)
+    #print("  Last Scavanger")
+    #print("="*40)
+
+    #printGameMainChoice()
     
 #메인 게임 화면에서 선택지 제공
 def printGameMainChoice():
