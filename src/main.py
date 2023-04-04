@@ -59,14 +59,12 @@ class LastScavanager():
 
     #그래픽 작업할 때
     def onRender(self):
-        testImage = self.font.render("테스트 내용입니다. test", 1, self.colorWhite)
-        testImageRect = testImage.get_rect()
-        testImageRect.center = (self.gameFrameWidth/2, self.gameFrameHeight/2)
+        testImage = self.font.render("Last Scavanger", 1, self.colorWhite)
 
         background = pygame.image.load("last-scavanger-game-main-screen.png")
 
         self.displaySurf.blit(background, (0, 0))
-        self.displaySurf.blit(testImage, testImageRect)
+        self.displaySurf.blit(testImage, (40, 300))
 
         pygame.display.update()
 
