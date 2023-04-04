@@ -1,14 +1,15 @@
-import main
+import src.main
 
 itemList = []
 
-def getItem(number):
+
+def get_item(number):
     for item in itemList:
-        if (item.id != number):
+        if item.id != number:
             continue
         return item
-        
 
-def setUp():
-    #print(main.prefix, "아이템을 초기화합니다.")
+
+def set_up():
+    # print(main.prefix, "아이템을 초기화합니다.")
     pass

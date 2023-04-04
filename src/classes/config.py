@@ -1,16 +1,15 @@
-import managers.listManager as listManager
+import src.managers.listManager as listManager
 
-class Config():
+
+class Config:
     def __init__(self, config: dict):
+        dict = listManager.find_element_in_dict(config, "default_Info")
 
-        dict = listManager.findElementInDict(config, "default_Info")
+        self.prefix = listManager.find_element_in_dict(dict, "prefix")
+        self.version = listManager.find_element_in_dict(dict, "version")
 
-        self.prefix = listManager.findElementInDict(dict, "prefix")
-        self.version = listManager.findElementInDict(dict, "version")
-        
-
-    def setPrefix(self, prefix: str):
+    def set_prefix(self, prefix: str):
         self.prefix = prefix
-    
-    def setVersion(self, version: str):
+
+    def set_version(self, version: str):
         self.version = version

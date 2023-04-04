@@ -10,12 +10,14 @@ import classes.config as config
 import managers.itemManager as itemManager
 import managers.situationManager as situationManager
 import managers.ymlManager as ymlManager
-import managers.listManager as listManager
+import managers.renderManager as renderManager
+import enums.gamePhase as gamePhase
 
-#코드 영감: http://pygametutorials.wikidot.com/tutorials-basic
+
+# 코드 영감: http://pygametutorials.wikidot.com/tutorials-basic
 class LastScavanager():
-    
-    #객체 초기화 될때
+
+    # 객체 초기화 될때
     def __init__(self):
         self.isRunning = True
         self.displaySurf = None
@@ -27,79 +29,68 @@ class LastScavanager():
         self.gameTitle = "Last Scavanger - " + config.version
         self.font = None
         self.clock = None
-    
-    #게임 초기화 시킬 때
-    def onInit(self):
+        self.phase = gamePhase.GamePhase.PHASE_1
+        self.path = os.getcwd()[:-3]
+
+    # 게임 초기화 시킬 때
+    def on_init(self):
         pygame.init()
 
-        #폰트 설정
+        # 폰트 설정
         self.font = pygame.font.SysFont("nanumgothic", 35)
 
-        #시간 설정
+        # 시간 설정
         self.clock = pygame.time.Clock()
 
-        #아이콘 설정
-        logo = pygame.image.load("last-scavanger-main-gui-icon.png")
+        # 아이콘 설정
+        logo = pygame.image.load(self.path + "last-scavanger-main-gui-icon.png")
         pygame.display.set_icon(logo)
 
-        #창 제목 설정
+        # 창 제목 설정
         pygame.display.set_caption(self.gameTitle)
         self.displaySurf = pygame.display.set_mode((self.gameFrameWidth, self.gameFrameHeight))
-        
+
         self.isRunning = True
 
-    #이벤트 감지할 때
-    def onEvent(self, event):
-        if (event.type == pygame.QUIT):
+    # 이벤트 감지할 때
+    def on_event(self, event):
+        if event.type == pygame.QUIT:
             self.isRunning = False
-    
-    #반복 작업할 때
-    def onLoop(self):
+
+    # 반복 작업할 때
+    def on_loop(self):
         self.clock.tick(self.fps)
 
-    #그래픽 작업할 때
-    def onRender(self):
-        testImage = self.font.render("Last Scavanger", 1, self.colorWhite)
-
-        background = pygame.image.load("last-scavanger-game-main-screen.png")
-
-        self.displaySurf.blit(background, (0, 0))
-        self.displaySurf.blit(testImage, (40, 300))
-
+    # 그래픽 작업할 때
+    def on_render(self):
+        renderManager.render_screen(self.phase)
         pygame.display.update()
 
-    #종료할 때
-    def onCleanup(self):
+    # 종료할 때
+    def on_cleanup(self):
         pygame.quit()
         sys.exit()
 
-    def onExecute(self):
-        if self.onInit() is False:
+    def on_execute(self):
+        if self.on_init() is False:
             self.isRunning = False
 
         while self.isRunning:
             for event in pygame.event.get():
-                self.onEvent(event)
+                self.on_event(event)
 
-            self.onLoop()
-            self.onRender()
+            self.on_loop()
+            self.on_render()
 
-        self.onCleanup()
+        self.on_cleanup()
 
 
-    #메인 화면 문구
-    #print("="*40)
-    #print("  Last Scavanger")
-    #print("="*40)
-
-    #printGameMainChoice()
-    
-#메인 게임 화면에서 선택지 제공
-def printGameMainChoice():
+# 메인 게임 화면에서 선택지 제공
+'''def printGameMainChoice():
     print(" 1. 모험 시작")
     print(" 2. 주거지 이동")
     print(" 3. 게임 종료")
-    #입력값 받기
+    # 입력값 받기
     choice = input("선택해주세요: ")
     match choice:
         case "1":
@@ -117,22 +108,22 @@ def printGameMainChoice():
             os.system("cls")
             print("올바르지 않은 값을 입력했습니다: ", choice)
             print("제대로 된 값을 입력해주세요. ")
-            printGameMainChoice()
+            printGameMainChoice()'''
 
-#메인 로직
+
+# 메인 로직
 if __name__ == "__main__":
-    #화면 정리
+    # 화면 정리
     os.system("cls")
 
-    #인스턴스 셋업
-    #print(prefix, "게임을 구성합니다.")
-    itemManager.setUp()
+    # 인스턴스 셋업
+    # print(prefix, "게임을 구성합니다.")
+    itemManager.set_up()
     situationManager.setUp()
 
-    #yml 불러옴
-    configYaml = ymlManager.loadYaml()
+    # yml 불러옴
+    configYaml = ymlManager.load_yaml()
     config = config.Config(configYaml)
 
-    #게임 실행
-    lastScavanger = LastScavanager()
-    lastScavanger.onExecute()
+    instance = LastScavanager()
+    instance.on_execute()
