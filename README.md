@@ -1,4 +1,4 @@
-# Last-Scavanger
+# Last-Scavenger
 ## 개요
 text game by python with post-apocalypse and virtual earth story background<br>
 파이썬으로 만든 텍스트 게임입니다. 포스트 아포칼립스 세계관에 가상 지구 환경 배경에서 생존하는 것이 목표입니다.
