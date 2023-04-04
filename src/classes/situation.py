@@ -1,5 +1,5 @@
-import src.enums.area as area
-import src.managers.situationManager as situationManager
+import enums.area as area
+import managers.situationManager as situationManager
 
 
 class Situation:

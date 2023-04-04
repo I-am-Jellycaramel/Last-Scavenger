@@ -30,7 +30,6 @@ class LastScavanager():
         self.font = None
         self.clock = None
         self.phase = gamePhase.GamePhase.PHASE_1
-        self.path = os.getcwd()[:-3]
 
     # 게임 초기화 시킬 때
     def on_init(self):
@@ -43,7 +42,7 @@ class LastScavanager():
         self.clock = pygame.time.Clock()
 
         # 아이콘 설정
-        logo = pygame.image.load(self.path + "last-scavanger-main-gui-icon.png")
+        logo = pygame.image.load("last-scavanger-main-gui-icon.png")
         pygame.display.set_icon(logo)
 
         # 창 제목 설정

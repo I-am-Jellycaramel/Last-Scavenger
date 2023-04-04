@@ -1,4 +1,4 @@
-import src.main
+import main
 
 itemList = []
 

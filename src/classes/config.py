@@ -1,4 +1,4 @@
-import src.managers.listManager as listManager
+import managers.listManager as listManager
 
 
 class Config:

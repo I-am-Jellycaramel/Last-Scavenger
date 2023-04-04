@@ -1,6 +1,6 @@
-import src.classes.situation as situation
-import src.enums.area as area
-import src.main as main
+import classes.situation as situation
+import enums.area as area
+import main as main
 
 situationList = []
 

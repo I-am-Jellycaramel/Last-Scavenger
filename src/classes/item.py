@@ -1,5 +1,5 @@
-import src.managers.itemManager as itemManager
-import src.enums.itemType as itemType
+import managers.itemManager as itemManager
+import enums.itemType as itemType
 
 
 class Item():

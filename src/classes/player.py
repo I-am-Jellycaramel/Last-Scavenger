@@ -1,4 +1,4 @@
-import src.classes.inventory as inventory
+import classes.inventory as inventory
 
 
 # 보관함, 상태 효과, 체력과 배고픔 수치를 나타내기 위한 클래스입니다.

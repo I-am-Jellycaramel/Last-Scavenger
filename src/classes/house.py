@@ -1,6 +1,6 @@
 import os
 import time
-import src.main as main
+import main as main
 
 MOVING_TIME = 3
 

@@ -1,5 +1,5 @@
 import time
-import src.classes.situation as situation
+import classes.situation as situation
 
 MOVING_TIME = 5
 

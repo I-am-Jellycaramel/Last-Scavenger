@@ -1,8 +1,8 @@
 import pygame
 from pygame.locals import *
 
-import src.enums.gamePhase as gamePhase
-import src.main as main
+import enums.gamePhase as gamePhase
+import main as main
 
 
 def render_screen(phase: gamePhase.GamePhase):
