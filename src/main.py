@@ -53,5 +53,5 @@ if __name__ == "__main__":
     configYaml = ymlManager.load_yaml()
     config = config.Config(configYaml)
 
-    instance = lastScavenger.LastScavenager(config.version)
+    instance = lastScavenger.LastScavenger(config.version)
     instance.on_execute()

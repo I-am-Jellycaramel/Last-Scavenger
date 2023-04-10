@@ -7,7 +7,7 @@ import enums.gamePhase as gamePhase
 import main 
 
 # 코드 영감: http://pygametutorials.wikidot.com/tutorials-basic
-class LastScavenager():
+class LastScavenger():
 
     # 객체 초기화 될때
     def __init__(self, version: str):
