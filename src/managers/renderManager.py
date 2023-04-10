@@ -2,17 +2,15 @@ import pygame
 from pygame.locals import *
 
 import enums.gamePhase as gamePhase
-import main as main
+import classes.lastscavenger as ls
 
-
-def render_screen(phase: gamePhase.GamePhase):
+def render_screen(phase: gamePhase.GamePhase, ls: ls.LastScavenager):
     match phase:
         case phase.PHASE_1:
-            print(main.instance.path)
-            background = pygame.image.load(main.instance.path + "last-scavanger-game-main-screen.png")
-            game_title = main.instance.font.render("Last Scavanger", 1, main.instance.colorWhite)
+            background = pygame.image.load("last-scavanger-game-main-screen.png")
+            game_title = ls.font.render("Last Scavanger", 1, ls.colorWhite)
 
-            main.instance.displaySurf.blit(background, (0, 0))
-            main.instance.displaySurf.blit(game_title, (40, 300))
+            ls.displaySurf.blit(background, (0, 0))
+            ls.displaySurf.blit(game_title, (40, 300))
         case _:
             pass
