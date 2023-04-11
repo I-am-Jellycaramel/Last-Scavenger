@@ -7,7 +7,7 @@ from pygame.locals import *
 import classes.adventure as adventure
 import classes.house as house
 import classes.config as config
-import classes.lastscavenger as lastScavenger
+import classes.lastscavenger as lastscav_import
 import managers.itemManager as itemManager
 import managers.situationManager as situationManager
 import managers.ymlManager as ymlManager
@@ -44,14 +44,14 @@ if __name__ == "__main__":
     # 화면 정리
     os.system("cls")
 
-    # 인스턴스 셋업
-    # print(prefix, "게임을 구성합니다.")
-    itemManager.set_up()
-    situationManager.setUp()
-
     # yml 불러옴
     configYaml = ymlManager.load_yaml()
     config = config.Config(configYaml)
+    instance = lastscav_import.LastScavenger(config.version)
 
-    instance = lastScavenger.LastScavenger(config.version)
+    # 인스턴스 셋업
+    # print(prefix, "게임을 구성합니다.")
+    itemManager.set_up()
+    situationManager.setUp(instance)
+
     instance.on_execute()
