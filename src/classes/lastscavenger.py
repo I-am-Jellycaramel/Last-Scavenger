@@ -1,10 +1,11 @@
 import sys
+import time
 
 import pygame
 from pygame.locals import *
 
 import enums.gamePhase as gamePhase
-import main 
+import classes.situation as situation
 
 # 코드 영감: http://pygametutorials.wikidot.com/tutorials-basic
 class LastScavenger():
@@ -28,7 +29,7 @@ class LastScavenger():
         pygame.init()
 
         # 폰트 설정
-        self.font = pygame.font.SysFont("nanumgothic", 35)
+        self.font = pygame.font.SysFont("nanumgothic", 20)
 
         # 시간 설정
         self.clock = pygame.time.Clock()
@@ -46,16 +47,32 @@ class LastScavenger():
     # 이벤트 감지할 때
     def on_event(self, event):
         if event.type == pygame.QUIT:
+            #게임 종료
             self.isRunning = False
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            pass
+
 
     # 반복 작업할 때
     def on_loop(self):
         self.clock.tick(self.fps)
 
+        #메인 화면 일 때 버튼에 마우스 가져다가 대면 버튼 색깔 바꾸기
+        if self.phase == gamePhase.GamePhase.PHASE_1:
+            import managers.situationManager as situationManager
+            main_screen_situation = situationManager.get_situation(0)
+            if isinstance(main_screen_situation, situation.Situation):
+                buttons = main_screen_situation.buttons
+                for button in buttons:
+                    if button.rect.collidepoint(pygame.mouse.get_pos()):
+                        print(".", time.time())
+                        button.draw_hover(self.displaySurf)
+
     # 그래픽 작업할 때
     def on_render(self):
         import managers.renderManager as renderManager
         renderManager.render_screen(self.phase, self)
+
         pygame.display.update()
 
     # 종료할 때
